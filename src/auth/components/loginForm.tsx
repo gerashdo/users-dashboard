@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { useForm } from "../../shared/hooks/useForm"
-import { FormLayout } from "./formLayout"
+import { FormLayout } from "./FormLayout"
 import { AuthContext } from "../context/authContext"
 
 export const LoginForm = () => {

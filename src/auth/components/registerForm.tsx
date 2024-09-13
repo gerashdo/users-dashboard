@@ -1,7 +1,9 @@
 import { useForm } from "../../shared/hooks/useForm"
-import { FormLayout } from "./formLayout"
+import { useSignUp } from "../hooks/useSignUp"
+import { FormLayout } from "./FormLayout"
 
 export const RegisterForm = () => {
+  const { signUpUser } = useSignUp()
 
   const { values, handleChange } = useForm({
     name: '',
@@ -14,6 +16,7 @@ export const RegisterForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log('Form submitted', values)
+    signUpUser(name, email, password)
   }
 
   return (

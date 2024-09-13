@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
-import { LoginForm } from "../components/loginForm"
-import { RegisterForm } from "../components/registerForm"
+import { LoginForm } from "../components/LoginForm"
+import { RegisterForm } from "../components/RegisterForm"
 import { AuthContext } from "../context/authContext"
 import { Redirect } from "wouter"
 

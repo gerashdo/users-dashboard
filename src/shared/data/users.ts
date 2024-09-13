@@ -88,5 +88,13 @@ export const users: User[] = [
     "lastLoginTime": "2024-09-10T18:50:10Z",
     "registrationTime": "2023-05-21T16:20:45Z",
     "status": "active"
+  },
+  {
+    "id": 12,
+    "name": "Gerardo",
+    "email": "ge@gmail.com",
+    "lastLoginTime": "2024-09-10T18:50:10Z",
+    "registrationTime": "2023-05-21T16:20:45Z",
+    "status": "active"
   }
 ]

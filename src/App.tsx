@@ -1,6 +1,6 @@
 import { Route, Switch } from 'wouter'
-import { AuthPage } from './auth/pages/authPage'
-import { UsersPage } from './users/pages/usersPage'
+import { AuthPage } from './auth/pages/AuthPage'
+import { UsersPage } from './users/pages/UsersPage'
 
 import './App.css'
 
