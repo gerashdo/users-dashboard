@@ -1,8 +1,10 @@
+import { useContext } from "react"
 import { useForm } from "../../shared/hooks/useForm"
 import { FormLayout } from "./formLayout"
+import { AuthContext } from "../context/authContext"
 
 export const LoginForm = () => {
-
+  const { loginAction } = useContext(AuthContext)
   const { values, handleChange } = useForm({
     email: '',
     password: ''
@@ -13,6 +15,7 @@ export const LoginForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log('Form submitted', values)
+    loginAction(email, password)
   }
 
   return (

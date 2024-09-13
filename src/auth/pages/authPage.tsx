@@ -1,6 +1,8 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { LoginForm } from "../components/loginForm"
 import { RegisterForm } from "../components/registerForm"
+import { AuthContext } from "../context/authContext"
+import { Redirect } from "wouter"
 
 enum AuthTabs {
   LOGIN = 'login',
@@ -8,8 +10,11 @@ enum AuthTabs {
 }
 
 export const AuthPage = () => {
-
   const [activeTab, setActiveTab] = useState<AuthTabs>(AuthTabs.LOGIN)
+  const { user } = useContext(AuthContext)
+
+  if (user) return <Redirect to="/users" />
+
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
