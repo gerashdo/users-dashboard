@@ -1,6 +1,5 @@
 import { useContext, useState } from "react"
 import { Redirect } from "wouter"
-
 import { AuthContext } from "../../auth/context/authContext"
 import { UserTable } from "../components/UserTable"
 import { Toolbar } from "../components/Toolbar"
@@ -8,6 +7,7 @@ import { Navbar } from "../components/Navbar"
 import { isUserInDeletionList } from "../utils/userUtils"
 import { User } from "../../shared/interfaces/user"
 import { users as initialUsers } from "../../shared/data/users"
+
 
 export const UsersPage = () => {
   const { user, logoutAction } = useContext(AuthContext)
@@ -54,7 +54,7 @@ export const UsersPage = () => {
 
   const onDelete = () => {
     setUsers(users.filter((user) => !selectedUsers.includes(user.id)))
-    if (isUserInDeletionList(selectedUsers, user.id)) logoutAction()
+    if (isUserInDeletionList(selectedUsers, Number(user._id))) logoutAction()
     setSelectedUsers([])
   }
 

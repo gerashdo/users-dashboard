@@ -1,8 +1,8 @@
-import { User } from "../../shared/interfaces/user"
+import { UserLoginResponse } from "../../auth/interfaces/api"
 
 interface NavbarProps {
   onLogout: () => void
-  currentUser: User
+  currentUser: UserLoginResponse
 }
 
 export const Navbar = ({ currentUser, onLogout}: NavbarProps) => {

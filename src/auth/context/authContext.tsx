@@ -1,10 +1,9 @@
-import { createContext, useState } from "react";
-import { User } from "../../shared/interfaces/user";
-import { useLogin } from "../hooks/useLogin";
+import { createContext, useState } from "react"
+import { UserLoginResponse } from "../interfaces/api"
 
 interface AuthContextType {
-  user: User | null;
-  loginAction: (email: string, password?: string) => Promise<void>;
+  user: UserLoginResponse | null;
+  loginAction: (user: UserLoginResponse) => Promise<void>;
   logoutAction: () => void;
 }
 
@@ -19,14 +18,10 @@ type AuthProviderProps = {
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [user, setUser] = useState<User | null>(null);
-  const { loginUser } = useLogin();
+  const [user, setUser] = useState<UserLoginResponse | null>(null);
 
-  const loginAction = async (email: string, password?: string) => {
-    const user = await loginUser(email);
-    console.log(password)
-    if (!user) return
-    setUser(user);
+  const loginAction = async (user: UserLoginResponse) => {
+    setUser(user)
   }
 
   const logoutAction = () => {
