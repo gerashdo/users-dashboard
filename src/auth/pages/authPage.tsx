@@ -15,6 +15,9 @@ export const AuthPage = () => {
 
   if (user) return <Redirect to="/users" />
 
+  const onSignUp = () => {
+    setActiveTab(AuthTabs.LOGIN)
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -45,7 +48,7 @@ export const AuthPage = () => {
         <div className="p-6">
           {activeTab === AuthTabs.LOGIN
             ? <LoginForm />
-            : <RegisterForm />
+            : <RegisterForm onSignUp={onSignUp}/>
           }
         </div>
       </div>

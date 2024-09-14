@@ -5,11 +5,18 @@ export interface UserLoginRequest {
 }
 
 export interface UserLoginResponse {
-  _id:           string;
-  name:          string;
-  email:         string;
-  isActive:      boolean;
-  lastLoginTime: Date;
-  createdAt:     Date;
-  updatedAt:     Date;
+  _id:           string
+  name:          string
+  email:         string
+  isActive:      boolean
+  lastLoginTime: string
+  createdAt:     string
+  updatedAt:     string
 }
+
+export interface CreateUserRequest {
+  name:     string
+  email:    string
+  password: string
+}
+

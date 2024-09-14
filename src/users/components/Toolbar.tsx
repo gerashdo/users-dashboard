@@ -1,6 +1,6 @@
 
 interface ToolbarProps {
-  selectedUsers: number[]
+  selectedUsers: string[]
   onBlock: () => void
   onUnblock: () => void
   onDelete: () => void

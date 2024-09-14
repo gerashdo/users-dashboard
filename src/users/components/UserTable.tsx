@@ -1,10 +1,10 @@
-import { User } from "../../shared/interfaces/user";
+import { UserLoginResponse } from "../../auth/interfaces/api";
 
 interface UserDashboardProps {
-  users: User[];
-  selectedUsers: number[];
+  users: UserLoginResponse[];
+  selectedUsers: string[];
   onSelectAll: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSelectUser: (id: number, checked: boolean) => void;
+  onSelectUser: (id: string, checked: boolean) => void;
 }
 
 export const UserTable = ({
@@ -37,23 +37,23 @@ export const UserTable = ({
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
             {users.map((user) => (
-              <tr key={user.id} className="border-b border-gray-200 hover:bg-gray-100">
+              <tr key={user._id} className="border-b border-gray-200 hover:bg-gray-100">
                 <td className="py-3 px-6 text-left whitespace-nowrap">
                   <input
                     type="checkbox"
-                    checked={selectedUsers.includes(user.id)}
-                    onChange={(e) => onSelectUser(user.id, e.target.checked)}
+                    checked={selectedUsers.includes(user._id)}
+                    onChange={(e) => onSelectUser(user._id, e.target.checked)}
                     className="form-checkbox h-5 w-5 text-blue-600"
                   />
                 </td>
-                <td className="py-3 px-6 text-left whitespace-nowrap">{user.id}</td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">{user._id}</td>
                 <td className="py-3 px-6 text-left whitespace-nowrap">{user.name}</td>
                 <td className="py-3 px-6 text-left whitespace-nowrap">{user.email}</td>
                 <td className="py-3 px-6 text-left whitespace-nowrap">{user.lastLoginTime}</td>
-                <td className="py-3 px-6 text-left whitespace-nowrap">{user.registrationTime}</td>
+                <td className="py-3 px-6 text-left whitespace-nowrap">{user.createdAt}</td>
                 <td className="py-3 px-6 text-left whitespace-nowrap">
-                  <span className={`py-1 px-3 rounded-full text-xs ${user.status === 'active' ? 'bg-green-200 text-green-600' : 'bg-red-200 text-red-600'}`}>
-                    {user.status}
+                  <span className={`py-1 px-3 rounded-full text-xs ${user.isActive ? 'bg-green-200 text-green-600' : 'bg-red-200 text-red-600'}`}>
+                    {user.isActive ? 'Active' : 'Blocked'}
                   </span>
                 </td>
               </tr>
