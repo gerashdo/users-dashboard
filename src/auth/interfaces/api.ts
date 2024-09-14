@@ -14,6 +14,16 @@ export interface UserLoginResponse {
   updatedAt:     string
 }
 
+export interface CreateUserResponse {
+  _id:           string
+  name:          string
+  email:         string
+  isActive:      boolean
+  lastLoginTime: string
+  createdAt:     string
+  updatedAt:     string
+}
+
 export interface CreateUserRequest {
   name:     string
   email:    string

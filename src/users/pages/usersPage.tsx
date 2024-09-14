@@ -5,15 +5,16 @@ import { UserTable } from "../components/UserTable"
 import { Toolbar } from "../components/Toolbar"
 import { Navbar } from "../components/Navbar"
 // import { isUserInDeletionList } from "../utils/userUtils"
-// import { User } from "../../shared/interfaces/user"
-// import { users as initialUsers } from "../../shared/data/users"
 import { useUsersQuery } from "../hooks/useUsersQuery"
+import { useUpdateUser } from "../hooks/useUpdateUser"
+import { useQueryClient } from "@tanstack/react-query"
 
 
 export const UsersPage = () => {
+  const queryClient = useQueryClient()
   const { user, logoutAction } = useContext(AuthContext)
-  // const [users, setUsers] = useState<User[]>(initialUsers)
   const { users, error, isLoading } = useUsersQuery()
+  const { startUpdateUser } = useUpdateUser()
   const [selectedUsers, setSelectedUsers] = useState<string[]>([])
 
   if (!user) return <Redirect to="/auth" />
@@ -37,25 +38,23 @@ export const UsersPage = () => {
     }
   }
 
-  const onBlock = () => {
-    // if (!users) return
-    // setUsers(users.map((user) => {
-    //   if (selectedUsers.includes(user._id)) {
-    //     return {...user, status: 'blocked'}
-    //   }
-    //   return user
-    // }))
+  const toggleUserStatus = async (ids: string[], isActive: boolean) => {
+    await Promise.all(ids.map((id) => startUpdateUser(id, { isActive })))
+
+    await queryClient.invalidateQueries({
+      queryKey: ['users'],
+      type: 'all',
+      exact: true,
+    })
     setSelectedUsers([])
   }
 
+  const onBlock = async () => {
+    toggleUserStatus(selectedUsers, false)
+  }
+
   const onUnblock = () => {
-    // setUsers(users.map((user) => {
-    //   if (selectedUsers.includes(user.id)) {
-    //     return {...user, status: 'active'}
-    //   }
-    //   return user
-    // }))
-    setSelectedUsers([])
+    toggleUserStatus(selectedUsers, true)
   }
 
   const onDelete = () => {
