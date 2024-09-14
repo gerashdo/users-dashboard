@@ -22,7 +22,7 @@ export const UserTable = ({
               <th className="py-3 px-6 text-start">
                 <input
                   type="checkbox"
-                  checked={selectedUsers.length === users.length}
+                  checked={users.length > 0 && selectedUsers.length === users.length}
                   onChange={onSelectAll}
                   className="form-checkbox h-5 w-5 text-blue-600"
                 />
