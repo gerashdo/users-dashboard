@@ -3,7 +3,7 @@ import { getUserById } from "../api/users"
 
 
 export const useGetUserQuery = (id: string, enabled: boolean) => {
-  const { data, isLoading, isError } = useQuery({
+  const {data, isLoading, isError} = useQuery({
     queryKey: ['users', id],
     queryFn: () => getUserById(id),
     enabled,

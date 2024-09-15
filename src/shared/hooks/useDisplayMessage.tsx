@@ -5,7 +5,7 @@ type MessageType = 'error' | 'success'
 const DEFAULT_DURATION = 10000
 
 export const useDisplayMessage = () => {
-  const displayMessage = (message: string, type: MessageType, duration?: number, ) => {
+  const displayMessage = (message: string, type: MessageType, duration?: number) => {
     if (type === 'error') {
       toast.error(message, {
         duration: duration || DEFAULT_DURATION,

@@ -4,6 +4,7 @@ import { RegisterForm } from "../components/RegisterForm"
 import { AuthContext } from "../context/authContext"
 import { Redirect } from "wouter"
 
+
 enum AuthTabs {
   LOGIN = 'login',
   REGISTER = 'register'
@@ -11,7 +12,7 @@ enum AuthTabs {
 
 export const AuthPage = () => {
   const [activeTab, setActiveTab] = useState<AuthTabs>(AuthTabs.LOGIN)
-  const { user } = useContext(AuthContext)
+  const {user} = useContext(AuthContext)
 
   if (user) return <Redirect to="/users" />
 

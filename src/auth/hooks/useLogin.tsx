@@ -7,16 +7,17 @@ import { loginUser } from "../api/auth"
 import { ErrorResponseBody } from "../../shared/interfaces/request"
 import { getLoginError } from "../utils/parseRequestError"
 
+
 export const useLogin = () => {
   const queryClient = useQueryClient()
-  const { displayMessage } = useDisplayMessage()
+  const {displayMessage} = useDisplayMessage()
   const {loginAction} = useContext(AuthContext)
 
   const loginMutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
       loginAction(data.data)
-      queryClient.invalidateQueries({ queryKey: ['users'] })
+      queryClient.invalidateQueries({queryKey: ['users']})
     },
     onError: (error: AxiosError<ErrorResponseBody>) => {
       const errorCode = error.response?.status || 500
@@ -26,7 +27,7 @@ export const useLogin = () => {
   })
 
   const login = (email: string, password: string) => {
-    loginMutation.mutate({ email, password })
+    loginMutation.mutate({email, password})
   }
 
   return {

@@ -1,6 +1,6 @@
 import axios from "axios"
 import { getEnvVariables } from "../../shared/utils/envVariables"
-import { GetUsersResponse, UpdateUserRequest, UpdateUserResponse,  } from "../interfaces/api"
+import { GetUsersResponse, UpdateUserRequest, UpdateUserResponse } from "../interfaces/api"
 
 
 const BASE_URL = getEnvVariables().VITE_API_URL

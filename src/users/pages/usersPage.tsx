@@ -1,26 +1,25 @@
 import { useContext, useState } from "react"
 import { Redirect } from "wouter"
 import { AuthContext } from "../../auth/context/authContext"
-import { useDisplayMessage } from "../../shared/hooks/useDisplayMessage"
-import { useUsersQuery } from "../hooks/useUsersQuery"
-import { useUpdateUser } from "../hooks/useUpdateUser"
-import { useDeleteUser } from "../hooks/useDeleteUser"
 import { Navbar } from "../components/Navbar"
 import { UserTable } from "../components/UserTable"
 import { Toolbar } from "../components/Toolbar"
+import { useUsersQuery } from "../hooks/useUsersQuery"
+import { useUpdateUser } from "../hooks/useUpdateUser"
+import { useDeleteUser } from "../hooks/useDeleteUser"
+import { useDisplayMessage } from "../../shared/hooks/useDisplayMessage"
 import { isUserInList } from "../utils/userUtils"
 
 
 export const UsersPage = () => {
-  const { user, logoutAction } = useContext(AuthContext)
-  const { users, error, isLoading } = useUsersQuery()
+  const {user, logoutAction} = useContext(AuthContext)
+  const {users, error, isLoading} = useUsersQuery()
   const {displayMessage} = useDisplayMessage()
-  const { startUpdateUser } = useUpdateUser()
-  const { deleteUserById } = useDeleteUser()
+  const {startUpdateUser} = useUpdateUser()
+  const {deleteUserById} = useDeleteUser()
   const [selectedUsers, setSelectedUsers] = useState<string[]>([])
 
   if (!user || !user.isActive) return <Redirect to="/auth" />
-
   if (error) displayMessage('The users could not be loaded', 'error')
 
   const onSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {

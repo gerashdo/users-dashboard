@@ -2,14 +2,14 @@ import { useForm } from "../../shared/hooks/useForm"
 import { FormLayout } from "./FormLayout"
 import { useLogin } from "../hooks/useLogin"
 
+
 export const LoginForm = () => {
-  const { login } = useLogin()
+  const {login} = useLogin()
   const { values, handleChange } = useForm({
     email: '',
     password: ''
   })
-
-  const { email, password } = values
+  const {email, password} = values
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

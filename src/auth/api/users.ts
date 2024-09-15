@@ -3,6 +3,7 @@ import { getEnvVariables } from "../../shared/utils/envVariables"
 import { CreateUserResponse, GetUserResponse } from "../interfaces/api"
 import { CreateUserRequest } from "../interfaces/api"
 
+
 const BASE_URL = getEnvVariables().VITE_API_URL
 
 export const createUser = async (data: CreateUserRequest) => {

@@ -1,5 +1,6 @@
 import { GetUsersResponse } from "../interfaces/api"
 
+
 interface UserDashboardProps {
   users: GetUsersResponse[];
   selectedUsers: string[];

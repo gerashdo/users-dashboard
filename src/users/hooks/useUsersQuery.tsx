@@ -1,13 +1,13 @@
+import { useEffect, useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { getUsers } from "../api/user"
-import { useEffect, useState } from "react"
 import { formatDateTime } from "../../shared/utils/dateFormat";
 import { GetUsersResponse } from "../interfaces/api";
 
 
 export const useUsersQuery = () => {
   const [users, setUsers] = useState<GetUsersResponse[]>([])
-  const { data, error, isLoading } = useQuery({
+  const {data, error, isLoading} = useQuery({
     queryKey: ['users'],
     queryFn: getUsers,
   })
@@ -22,5 +22,5 @@ export const useUsersQuery = () => {
     }
   }, [data])
 
-  return { users, error, isLoading }
+  return {users, error, isLoading}
 }

@@ -1,21 +1,19 @@
-import { useForm } from "../../shared/hooks/useForm"
 import { useCreateUser } from "../hooks/useCreateUser"
 import { FormLayout } from "./FormLayout"
+import { useForm } from "../../shared/hooks/useForm"
 
 interface RegisterFormProps {
   onSignUp?: () => void
 }
 
 export const RegisterForm = ({ onSignUp }: RegisterFormProps) => {
-  const { signUp } = useCreateUser()
-
+  const {signUp} = useCreateUser()
   const { values, handleChange, reset } = useForm({
     name: '',
     email: '',
     password: ''
   })
-
-  const { name, email, password } = values
+  const {name, email, password} = values
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

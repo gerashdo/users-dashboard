@@ -1,12 +1,11 @@
+import { useContext } from 'react'
 import { Route, Switch } from 'wouter'
 import { Toaster } from 'sonner'
 import { AuthPage } from './auth/pages/AuthPage'
 import { UsersPage } from './users/pages/UsersPage'
-
-import './App.css'
-import { useContext } from 'react'
 import { AuthContext } from './auth/context/authContext'
 import { Spinner } from './shared/components/Spinner'
+
 
 function App() {
   const {isLoading} = useContext(AuthContext)

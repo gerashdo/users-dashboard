@@ -1,4 +1,3 @@
-// import {ReactComponent as UnlockIcon} from '../../assets/icons/unlock.svg'
 
 interface ToolbarProps {
   selectedUsers: string[]

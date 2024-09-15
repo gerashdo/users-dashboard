@@ -23,7 +23,7 @@ export const useCreateUser = () => {
   })
 
   const signUp = async (name: string, email: string, password: string) => {
-    const result = await mutation.mutateAsync({ name, email, password })
+    const result = await mutation.mutateAsync({name, email, password})
     if (result.status === 201) {
       return true
     }
