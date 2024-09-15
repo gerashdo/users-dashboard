@@ -5,7 +5,7 @@ import { AuthContext } from "../context/authContext"
 import { useDisplayMessage } from "../../shared/hooks/useDisplayMessage"
 import { loginUser } from "../api/auth"
 import { ErrorResponseBody } from "../../shared/interfaces/request"
-import { getLoginError } from "../../shared/utils/parseRequestError"
+import { getLoginError } from "../utils/parseRequestError"
 
 export const useLogin = () => {
   const queryClient = useQueryClient()

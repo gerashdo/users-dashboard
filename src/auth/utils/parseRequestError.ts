@@ -1,5 +1,5 @@
+import { ErrorCode } from "../../shared/interfaces/request";
 
-type ErrorCode = 400 | 401 | 404 | 500;
 
 const codeMessages: Record<ErrorCode, string> = {
   400: 'Invalid request, please check your data',
