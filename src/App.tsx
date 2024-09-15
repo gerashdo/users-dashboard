@@ -1,4 +1,5 @@
 import { Route, Switch } from 'wouter'
+import { Toaster } from 'sonner'
 import { AuthPage } from './auth/pages/AuthPage'
 import { UsersPage } from './users/pages/UsersPage'
 
@@ -12,6 +13,7 @@ function App() {
         <Route path={'/auth'} component={AuthPage} />
         <Route path="*" component={AuthPage} />
       </Switch>
+      <Toaster position='top-left' />
     </>
   )
 }
