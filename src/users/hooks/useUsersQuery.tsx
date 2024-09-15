@@ -17,7 +17,7 @@ export const useUsersQuery = () => {
       setUsers(data.data.map((user: UserLoginResponse) => ({
         ...user,
         createdAt: formatDateTime(user.createdAt),
-        updatedAt: formatDateTime(user.updatedAt),
+        lastLoginTime: user.lastLoginTime ? formatDateTime(user.lastLoginTime) : 'Never',
       })))
     }
   }, [data])
