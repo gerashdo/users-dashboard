@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getUsers } from "../../auth/api/users"
+import { getUsers } from "../api/user"
 import { useEffect, useState } from "react"
 import { formatDateTime } from "../../shared/utils/dateFormat";
 import { GetUsersResponse } from "../interfaces/api";
