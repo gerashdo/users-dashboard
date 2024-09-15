@@ -1,6 +1,6 @@
 import axios from "axios"
 import { getEnvVariables } from "../../shared/utils/envVariables"
-import { GetUsersResponse, UpdateUserRequest,  } from "../interfaces/api"
+import { GetUsersResponse, UpdateUserRequest, UpdateUserResponse,  } from "../interfaces/api"
 
 
 const BASE_URL = getEnvVariables().VITE_API_URL
@@ -17,7 +17,7 @@ type UpdateUserProps = {
 
 export const updateUser = async({ id, data}: UpdateUserProps) => {
   const url = `${BASE_URL}/users/${id}`
-  return axios.put<GetUsersResponse>(url, data)
+  return axios.put<UpdateUserResponse>(url, data)
 }
 
 export const deleteUser = async(id: string) => {

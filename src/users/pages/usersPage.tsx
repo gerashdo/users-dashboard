@@ -1,26 +1,27 @@
 import { useContext, useState } from "react"
 import { Redirect } from "wouter"
 import { AuthContext } from "../../auth/context/authContext"
-import { UserTable } from "../components/UserTable"
-import { Toolbar } from "../components/Toolbar"
-import { Navbar } from "../components/Navbar"
-import { isUserInList } from "../utils/userUtils"
+import { useDisplayMessage } from "../../shared/hooks/useDisplayMessage"
 import { useUsersQuery } from "../hooks/useUsersQuery"
 import { useUpdateUser } from "../hooks/useUpdateUser"
 import { useDeleteUser } from "../hooks/useDeleteUser"
+import { Navbar } from "../components/Navbar"
+import { UserTable } from "../components/UserTable"
+import { Toolbar } from "../components/Toolbar"
+import { isUserInList } from "../utils/userUtils"
 
 
 export const UsersPage = () => {
   const { user, logoutAction } = useContext(AuthContext)
   const { users, error, isLoading } = useUsersQuery()
+  const {displayMessage} = useDisplayMessage()
   const { startUpdateUser } = useUpdateUser()
   const { deleteUserById } = useDeleteUser()
   const [selectedUsers, setSelectedUsers] = useState<string[]>([])
 
   if (!user || !user.isActive) return <Redirect to="/auth" />
 
-  if (isLoading) return <div>Loading...</div>
-  if (error) return <div>Error: {error.message}</div>
+  if (error) displayMessage('The users could not be loaded', 'error')
 
   const onSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
@@ -68,12 +69,19 @@ export const UsersPage = () => {
           onUnblock={onUnblock}
           onDelete={onDelete}
         />
-        <UserTable
-          users={users}
-          selectedUsers={selectedUsers}
-          onSelectAll={onSelectAll}
-          onSelectUser={onSelectUser}
-        />
+        {
+          isLoading && <div>Loading...</div>
+        }
+        {
+          !isLoading && !error && (
+            <UserTable
+              users={users}
+              selectedUsers={selectedUsers}
+              onSelectAll={onSelectAll}
+              onSelectUser={onSelectUser}
+            />
+          )
+        }
       </main>
     </div>
   )

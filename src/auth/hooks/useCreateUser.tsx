@@ -1,16 +1,24 @@
-import { useMutation } from "@tanstack/react-query"
-import { createUser } from "../api/users"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { AxiosError } from "axios"
+import { createUser } from "../api/users"
+import { useDisplayMessage } from "../../shared/hooks/useDisplayMessage"
+import { getSignUpError } from "../utils/parseRequestError"
+import { ErrorResponseBody } from "../../shared/interfaces/request"
 
 
 export const useCreateUser = () => {
+  const queryClient = useQueryClient()
+  const {displayMessage} = useDisplayMessage()
   const mutation = useMutation({
     mutationFn: createUser,
-    onSuccess: (data) => {
-      console.log(data)
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey:['users']})
+      displayMessage('User created successfully', 'success', 4000)
     },
-    onError: (error: AxiosError) => {
-      console.log(error)
+    onError: (error: AxiosError<ErrorResponseBody>) => {
+      const responseCode = error.response?.status || 500
+      const errorMessage = getSignUpError(responseCode)
+      displayMessage(errorMessage, 'error')
     }
   })
 

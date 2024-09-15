@@ -1,7 +1,7 @@
-import { UserLoginResponse } from "../../auth/interfaces/api";
+import { GetUsersResponse } from "../interfaces/api"
 
 interface UserDashboardProps {
-  users: UserLoginResponse[];
+  users: GetUsersResponse[];
   selectedUsers: string[];
   onSelectAll: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSelectUser: (id: string, checked: boolean) => void;

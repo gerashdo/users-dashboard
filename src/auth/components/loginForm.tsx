@@ -14,7 +14,6 @@ export const LoginForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     login(email, password)
-    console.log('Form submitted', values)
   }
 
   return (
