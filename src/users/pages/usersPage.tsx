@@ -4,7 +4,7 @@ import { AuthContext } from "../../auth/context/authContext"
 import { UserTable } from "../components/UserTable"
 import { Toolbar } from "../components/Toolbar"
 import { Navbar } from "../components/Navbar"
-import { isUserInDeletionList } from "../utils/userUtils"
+import { isUserInList } from "../utils/userUtils"
 import { useUsersQuery } from "../hooks/useUsersQuery"
 import { useUpdateUser } from "../hooks/useUpdateUser"
 import { useDeleteUser } from "../hooks/useDeleteUser"
@@ -17,7 +17,7 @@ export const UsersPage = () => {
   const { deleteUserById } = useDeleteUser()
   const [selectedUsers, setSelectedUsers] = useState<string[]>([])
 
-  if (!user) return <Redirect to="/auth" />
+  if (!user || !user.isActive) return <Redirect to="/auth" />
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error: {error.message}</div>
@@ -45,6 +45,7 @@ export const UsersPage = () => {
 
   const onBlock = () => {
     toggleUserStatus(false)
+    if (isUserInList(selectedUsers,user._id)) logoutAction()
   }
 
   const onUnblock = () => {
@@ -53,7 +54,7 @@ export const UsersPage = () => {
 
   const onDelete = async () => {
     selectedUsers.map((id) => deleteUserById(id))
-    if (isUserInDeletionList(selectedUsers,user._id)) logoutAction()
+    if (isUserInList(selectedUsers,user._id)) logoutAction()
     setSelectedUsers([])
   }
 
