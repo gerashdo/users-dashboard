@@ -1,5 +1,8 @@
 
 export const formatDateTime = (isoDateTime: string) => {
+  if (!isoDateTime) {
+    return ''
+  }
   const date = new Date(isoDateTime)
   const formattedDate = date.toLocaleDateString('en-US', {
     year: 'numeric',

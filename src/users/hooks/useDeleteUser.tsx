@@ -1,12 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { updateUser } from "../api/user"
-import { UpdateUserRequest } from "../interfaces/api"
+import { deleteUser } from "../api/user"
 
 
-export const useUpdateUser = () => {
+export const useDeleteUser = () => {
   const queryClient = useQueryClient()
   const mutation = useMutation({
-    mutationFn: updateUser,
+    mutationFn: deleteUser,
     onSuccess: () => {
       queryClient.invalidateQueries({queryKey: ['users']})
     },
@@ -15,11 +14,11 @@ export const useUpdateUser = () => {
     }
   })
 
-  const startUpdateUser = (id: string, data: UpdateUserRequest) => {
-    mutation.mutate({id, data})
+  const deleteUserById = (id: string) => {
+    mutation.mutate(id)
   }
 
   return {
-    startUpdateUser,
+    deleteUserById,
   }
 }

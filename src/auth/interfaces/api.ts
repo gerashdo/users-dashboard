@@ -9,7 +9,7 @@ export interface UserLoginResponse {
   name:          string
   email:         string
   isActive:      boolean
-  lastLoginTime: string
+  lastLoginTime?: string
   createdAt:     string
   updatedAt:     string
 }

@@ -4,17 +4,17 @@ import { AuthContext } from "../../auth/context/authContext"
 import { UserTable } from "../components/UserTable"
 import { Toolbar } from "../components/Toolbar"
 import { Navbar } from "../components/Navbar"
-// import { isUserInDeletionList } from "../utils/userUtils"
+import { isUserInDeletionList } from "../utils/userUtils"
 import { useUsersQuery } from "../hooks/useUsersQuery"
 import { useUpdateUser } from "../hooks/useUpdateUser"
-import { useQueryClient } from "@tanstack/react-query"
+import { useDeleteUser } from "../hooks/useDeleteUser"
 
 
 export const UsersPage = () => {
-  const queryClient = useQueryClient()
   const { user, logoutAction } = useContext(AuthContext)
   const { users, error, isLoading } = useUsersQuery()
   const { startUpdateUser } = useUpdateUser()
+  const { deleteUserById } = useDeleteUser()
   const [selectedUsers, setSelectedUsers] = useState<string[]>([])
 
   if (!user) return <Redirect to="/auth" />
@@ -38,29 +38,23 @@ export const UsersPage = () => {
     }
   }
 
-  const toggleUserStatus = async (ids: string[], isActive: boolean) => {
-    await Promise.all(ids.map((id) => startUpdateUser(id, { isActive })))
-
-    await queryClient.invalidateQueries({
-      queryKey: ['users'],
-      type: 'all',
-      exact: true,
-    })
+  const toggleUserStatus = async (isActive: boolean) => {
+    selectedUsers.map((id) => startUpdateUser(id, { isActive }))
     setSelectedUsers([])
   }
 
-  const onBlock = async () => {
-    toggleUserStatus(selectedUsers, false)
+  const onBlock = () => {
+    toggleUserStatus(false)
   }
 
   const onUnblock = () => {
-    toggleUserStatus(selectedUsers, true)
+    toggleUserStatus(true)
   }
 
-  const onDelete = () => {
-    // setUsers(users.filter((user) => !selectedUsers.includes(user.id)))
-    // if (isUserInDeletionList(selectedUsers, Number(user._id))) logoutAction()
-    // setSelectedUsers([])
+  const onDelete = async () => {
+    selectedUsers.map((id) => deleteUserById(id))
+    if (isUserInDeletionList(selectedUsers,user._id)) logoutAction()
+    setSelectedUsers([])
   }
 
   return (

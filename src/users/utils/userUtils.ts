@@ -1,4 +1,4 @@
 
-export const isUserInDeletionList = (userIds: number[], userId: number) => {
+export const isUserInDeletionList = (userIds: string[], userId: string) => {
   return userIds.includes(userId)
 }

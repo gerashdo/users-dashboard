@@ -19,3 +19,8 @@ export const updateUser = async({ id, data}: UpdateUserProps) => {
   const url = `${BASE_URL}/users/${id}`
   return axios.put<GetUsersResponse>(url, data)
 }
+
+export const deleteUser = async(id: string) => {
+  const url = `${BASE_URL}/users/${id}`
+  return axios.delete(url)
+}
